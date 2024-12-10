@@ -1,0 +1,55 @@
+openapi: 3.0.3
+info:
+  title: SparkLayer Coding Test
+  version: 1.0.11
+
+paths:
+  /:
+    post:
+      summary: Add a To-Do to the list
+      operationId: createToDo
+      requestBody:
+        description: Create a new To-Do Task
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/To-Do'
+        required: true
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/To-Do'
+        '400':
+          description: Invalid input
+    get:
+      summary: Gets the To-Do List
+      operationId: getToDo
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/To-Do-List'
+components:
+  schemas:
+    To-Do-List:
+
+      additionalProperties: false
+      type: array
+      items:
+        $ref: '#/components/schemas/To-Do'
+    To-Do:
+      required:
+        - title
+        - description
+      properties:
+        title:
+          type: string
+          example: Go for a jog
+        description:
+          type: string
+          example: run 4km around the river
